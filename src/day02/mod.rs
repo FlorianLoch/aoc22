@@ -1,29 +1,21 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
-use std::collections::HashMap;
+use std::collections::{HashMap};
+use crate::puzzle;
 
-fn main() {
-    let mut _sum = 0;
+pub struct Day02 {}
 
-    if let Ok(lines) = read_lines("./input") {
-        for line in lines {
-            if let Ok(l) = line {
-                _sum += handle_line(l)
-            }
-        }
+impl puzzle::Puzzle for Day02 {
+    fn group_n_lines(&self) -> usize {
+        1
     }
 
-    println!("Total score {}", _sum)
-}
+    fn solve(&self, lines: &Vec<String>) -> i32 {
+        let chars: Vec<char> = lines[0].chars().collect();
 
-fn handle_line(line: String) -> i32 {
-    let chars: Vec<char> = line.chars().collect();
+        let opponent = chars[0];
+        let you = chars[2];
 
-    let opponent = chars[0];
-    let you = chars[2];
-
-    return play_round(opponent, you)
+        return play_round(opponent, you)
+    }
 }
 
 fn play_round(opponent: char, you: char) -> i32 {
@@ -118,12 +110,4 @@ fn decrypt(opponent: char, you: char) -> char {
 
     // opponent == 'C' {
     return 'A'
-}
-
-// The output is wrapped in a Result to allow matching on errors
-// Returns an Iterator to the Reader of the lines of the file.
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }
