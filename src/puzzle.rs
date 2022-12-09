@@ -1,94 +1,93 @@
-use std::borrow::Borrow;
+use io::BufReader;
 use std::fs::File;
-use std::io::{self, BufRead};
+use std::io::{self, BufRead, Lines};
 use std::path::Path;
 
-pub trait Puzzle {
-    fn group_n_lines(&self) -> usize {
-        return 1
-    }
-    fn solve(&self, lines: &Vec<String>) -> i32;
-}
+type PuzzleFn = fn (lines: &mut Lines<BufReader<File>>);
+
 
 pub struct Puzzler {
-    puzzles: Vec<Box<dyn Puzzle>>
+    puzzles: Vec<PuzzleFn>
 }
 
 impl Puzzler {
     pub fn new() -> Puzzler {
-        Puzzler{ puzzles: vec![] }
+        Puzzler { puzzles: vec![] }
     }
 
-    pub fn add_puzzle(&mut self, boxed_puzzle: Box<dyn Puzzle>) {
-        self.puzzles.push(boxed_puzzle)
+    pub fn add_puzzle(&mut self, puzzle: PuzzleFn) {
+        self.puzzles.push(puzzle)
     }
 
     pub fn run_puzzle_for_day(&self, day: usize) {
-        // let day: usize = (day - 1).try_into().unwrap();
-
         if day - 1 >= self.puzzles.len() {
             panic!("Invalid day ('{}')!", day);
         }
 
-        run_puzzle(self.puzzles[day - 1].borrow(), day);
+        run_puzzle(self.puzzles[day - 1], day);
     }
 
     pub fn run_latest_puzzle(&self) {
         match self.puzzles.last() {
-            Some(p)=> {
+            Some(p) => {
                 let day = self.puzzles.len();
 
-                run_puzzle(p.borrow(), day);
+                println!("=> Running puzzle for day {}", day);
+
+                run_puzzle(*p, day);
             }
-            None => {println!("No puzzle has been added yet")}
+            None => { println!("No puzzle has been added yet") }
+        }
+    }
+
+    pub fn run_all_puzzles(&self) {
+        if self.puzzles.len() == 0 {
+            println!("No puzzle has been added yet");
+
+            return;
+        }
+
+        for i in 0..self.puzzles.len() {
+            self.run_puzzle_for_day(i+1)
         }
     }
 }
 
-fn run_puzzle(puzzle: &dyn Puzzle, day: usize) {
-    println!("=> Running puzzle for day {}", day);
-
+fn run_puzzle(puzzle: PuzzleFn, day: usize) {
     let path = format!("./src/day{:0>2}/", day);
 
-    let file = path.to_owned() +  "input_test";
-    let test_result = _run_puzzle(puzzle, file.as_str());
+    println!("==> Day {}", day);
+    println!("--> With test input");
 
-    println!("Test result: {}", test_result);
+    let file = path.to_owned() + "input_test";
+    _run_puzzle(puzzle, &path, &file);
 
-    let file = path.to_owned() +  "input_full";
-    let actual_result = _run_puzzle(puzzle, file.as_str());
+    println!("--> With actual input");
 
-    println!("Actual result: {}", actual_result);
+    let file = path.to_owned() + "input_full";
+    _run_puzzle(puzzle, &path, &file);
 }
 
-fn _run_puzzle(puzzle: &dyn Puzzle, input_file: &str) -> i32 {
-    let mut result = 0;
-    let mut i: usize = 1;
-
-    let lines = read_lines(input_file).expect("Failed to read lines from file");
-
-    let mut list = Vec::<String>::new();
-
-    for line in lines {
-        let l = line.expect("Failed to read line");
-
-        list.push(l);
-
-        if i % puzzle.group_n_lines() == 0 {
-            result += puzzle.solve(&list);
-
-            list.truncate(0);
-        }
-
-        i += 1;
-    }
-
-    return result;
+fn _run_puzzle(puzzle: PuzzleFn, input_path: &str, input_file: &str) {
+    puzzle(&mut read_lines(input_file).expect("Failed to read file"));
 }
 
 // The output is wrapped in a Result to allow matching on errors
 // Returns an Iterator to the Reader of the lines of the file.
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>> where P: AsRef<Path>, {
+fn read_lines<P>(filename: P) -> io::Result<Lines<BufReader<File>>> where P: AsRef<Path>, {
     let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
+    Ok(BufReader::new(file).lines())
+}
+
+pub fn read_n_lines(lines: &mut Lines<BufReader<File>>, n: usize) -> Vec<String> {
+    let mut vec = Vec::<String>::new();
+
+    for _ in 0..n {
+        match lines.next() {
+            None => return vec,
+            Some(line) => vec.push(line.expect("Failed to read line"))
+        }
+    }
+
+    return vec;
 }

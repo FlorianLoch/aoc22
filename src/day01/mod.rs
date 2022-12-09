@@ -1,16 +1,9 @@
 use std::collections::{HashSet};
-use crate::puzzle;
+use std::fs::File;
+use std::io::{BufReader, Lines};
 
-pub struct Day01 {}
-
-impl puzzle::Puzzle for Day01 {
-    fn group_n_lines(&self) -> usize {
-        1
-    }
-
-    fn solve(&self, lines: &Vec<String>) -> i32 {
-        todo!()
-    }
+pub fn solve(lines: &mut Lines<BufReader<File>>) {
+    todo!()
 }
 
 // The former logic:

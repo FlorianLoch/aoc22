@@ -1,22 +1,22 @@
-use std::collections::{HashMap};
-use crate::puzzle;
+use std::collections::HashMap;
+use std::fs::File;
+use std::io::{BufReader, Lines};
 
-pub struct Day02 {}
+pub fn solve(lines: &mut Lines<BufReader<File>>) {
+    let mut sum = 0;
 
-impl puzzle::Puzzle for Day02 {
-    fn group_n_lines(&self) -> usize {
-        1
-    }
-
-    fn solve(&self, lines: &Vec<String>) -> i32 {
-        let chars: Vec<char> = lines[0].chars().collect();
+    for line in lines {
+        let chars: Vec<char> = line.expect("Failed to read line").chars().collect();
 
         let opponent = chars[0];
         let you = chars[2];
 
-        return play_round(opponent, you)
+        sum += play_round(opponent, you);
     }
+
+    println!("\tSum: {}", sum)
 }
+
 
 fn play_round(opponent: char, you: char) -> i32 {
     // let mut encryption = HashMap::<char, char>::new();
@@ -39,41 +39,41 @@ fn play_round(opponent: char, you: char) -> i32 {
     let value_of_decrypted = *value.get(&decrypted).unwrap();
 
     if decrypted == opponent {
-        return 3 + value_of_decrypted
+        return 3 + value_of_decrypted;
     }
 
     if decrypted == 'A' {
         if opponent == 'B' {
-            return 0 + value_of_decrypted
+            return 0 + value_of_decrypted;
         }
 
         if opponent == 'C' {
-            return 6 + value_of_decrypted
+            return 6 + value_of_decrypted;
         }
     }
 
     if decrypted == 'B' {
         if opponent == 'A' {
-            return 6 + value_of_decrypted
+            return 6 + value_of_decrypted;
         }
 
         if opponent == 'C' {
-            return 0 + value_of_decrypted
+            return 0 + value_of_decrypted;
         }
     }
 
     if decrypted == 'C' {
         if opponent == 'A' {
-            return 0 + value_of_decrypted
+            return 0 + value_of_decrypted;
         }
 
         if opponent == 'B' {
-            return 6 + value_of_decrypted
+            return 6 + value_of_decrypted;
         }
     }
 
     // Should never happen
-    return -1
+    return -1;
 }
 
 fn decrypt(opponent: char, you: char) -> char {
@@ -83,31 +83,31 @@ fn decrypt(opponent: char, you: char) -> char {
 
     if you == 'X' {
         if opponent == 'A' {
-            return 'C'
+            return 'C';
         }
 
         if opponent == 'B' {
-            return 'A'
+            return 'A';
         }
 
         if opponent == 'C' {
-            return 'B'
+            return 'B';
         }
     }
 
     if you == 'Y' {
-        return opponent
+        return opponent;
     }
 
     // you == 'Z'
     if opponent == 'A' {
-        return 'B'
+        return 'B';
     }
 
     if opponent == 'B' {
-        return 'C'
+        return 'C';
     }
 
     // opponent == 'C' {
-    return 'A'
+    return 'A';
 }

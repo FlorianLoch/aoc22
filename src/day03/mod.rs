@@ -1,19 +1,25 @@
 use std::collections::{HashMap, HashSet};
+use std::fs::File;
+use std::io::{BufReader, Lines};
 use crate::puzzle;
 
-pub struct Day03 {}
+pub fn solve(lines: &mut Lines<BufReader<File>>) {
+    let mut sum = 0;
 
-impl puzzle::Puzzle for Day03 {
-    fn group_n_lines(&self) -> usize {
-        3
+    loop {
+        let mut grouped_lines = puzzle::read_n_lines(lines, 3);
+
+        sum += priority(find_group_id(&mut grouped_lines));
+
+        if grouped_lines.len() < 3 {
+            break
+        }
     }
 
-    fn solve(&self, lines: &Vec<String>) -> i32 {
-        return priority(find_group_id(lines));
-    }
+    println!("\tSum: {}", sum)
 }
 
-fn find_group_id(lines: &Vec<String>) -> char {
+fn find_group_id(lines: &mut Vec<String>) -> char {
     let mut map = HashMap::<char, i8>::new();
 
     for line in lines {
@@ -40,7 +46,7 @@ fn find_group_id(lines: &Vec<String>) -> char {
         }
     }
 
-    panic!("cannot find group id")
+    panic!("Cannot find group id")
 }
 
 fn find_misplaced(line: String) -> char {
@@ -61,7 +67,7 @@ fn find_misplaced(line: String) -> char {
         i += 1;
     }
 
-    panic!("no duplicate found")
+    panic!("No duplicate found")
 }
 
 fn priority(c: char) -> i32 {

@@ -1,25 +1,25 @@
+use std::fs::File;
+use std::io::{BufReader, Lines};
 use std::ops::Range;
-use crate::puzzle;
 
-pub struct Day04 {}
+pub fn solve(lines: &mut Lines<BufReader<File>>) {
+    let mut sum = 0;
 
-impl puzzle::Puzzle for Day04 {
-    fn group_n_lines(&self) -> usize {
-        1
-    }
-
-    fn solve(&self, lines: &Vec<String>) -> i32 {
-        let ranges: Vec<&str> = lines[0].split(",").collect();
+    for line in lines {
+        let s = line.expect("Failed to read line");
+        let ranges: Vec<&str> = s.split(",").collect();
 
         let r1 = parse_range(ranges[0]);
         let r2 = parse_range(ranges[1]);
 
-        if does_range_contain_range(&r1, &r2) || does_range_contain_range(&r2, &r1) {
-            return 1;
+        sum += if does_range_contain_range(&r1, &r2) || does_range_contain_range(&r2, &r1) {
+            1
+        } else {
+            0
         }
-
-        return 0;
     }
+
+    println!("\tSum: {}", sum)
 }
 
 fn does_range_contain_range(r1: &Range::<u32>, r2: &Range::<u32>) -> bool {
@@ -34,5 +34,5 @@ fn parse_range(s: &str) -> Range<u32> {
     let start = parts[0].trim().parse().expect("Failed to parse start of range");
     let end: u32 = parts[1].trim().parse().expect("Failed to parse start of range");
 
-    return start..end
+    return start..end;
 }
