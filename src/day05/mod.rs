@@ -56,7 +56,7 @@ pub fn solve(lines: &mut Lines<BufReader<File>>) {
         }
     }
 
-    let mut i = 1;
+    // let mut i = 1;
 
     println!("\tStackheads: ");
 
@@ -68,7 +68,7 @@ pub fn solve(lines: &mut Lines<BufReader<File>>) {
             None => "".to_string()
         });
 
-        i += 1;
+        // i += 1;
     }
 
     print!("\n");

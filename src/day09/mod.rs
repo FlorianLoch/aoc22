@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 use std::fs::File;
-use std::hash::{Hash, Hasher};
+use std::hash::{Hash};
 use std::io::{BufReader, Lines};
 
 #[derive(Hash, Eq, PartialEq, Copy, Clone)]

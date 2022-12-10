@@ -8,12 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a8eb286-a767-4418-b748-b6437877e8f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/day01/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/day01/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/day02/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/day02/mod.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/day03/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/day03/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/day04/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/day04/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/day05/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/day05/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/day09/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/day09/mod.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/puzzle.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/puzzle.rs" afterDir="false" />
     </list>
@@ -58,7 +57,7 @@
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/floch",
+    "last_opened_file_path": "/Users/floch/Desktop/priv/aoc2022/src",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -73,6 +72,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/day05" />
       <recent name="$PROJECT_DIR$/src/day06" />

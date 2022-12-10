@@ -49,26 +49,26 @@ fn find_group_id(lines: &mut Vec<String>) -> char {
     panic!("Cannot find group id")
 }
 
-fn find_misplaced(line: String) -> char {
-    let mut compartment1 = HashSet::<char>::new();
-
-    let half = line.len() / 2;
-    let mut i = 0;
-
-    for c in line.chars() {
-        if i < half {
-            compartment1.insert(c);
-        } else {
-            if compartment1.contains(&c) {
-                return c
-            }
-        }
-
-        i += 1;
-    }
-
-    panic!("No duplicate found")
-}
+// fn find_misplaced(line: String) -> char {
+//     let mut compartment1 = HashSet::<char>::new();
+//
+//     let half = line.len() / 2;
+//     let mut i = 0;
+//
+//     for c in line.chars() {
+//         if i < half {
+//             compartment1.insert(c);
+//         } else {
+//             if compartment1.contains(&c) {
+//                 return c
+//             }
+//         }
+//
+//         i += 1;
+//     }
+//
+//     panic!("No duplicate found")
+// }
 
 fn priority(c: char) -> i32 {
     let i = c as u32;

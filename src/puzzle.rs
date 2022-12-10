@@ -5,11 +5,11 @@ use std::path::Path;
 
 type PuzzleFn = fn (lines: &mut Lines<BufReader<File>>);
 
-
 pub struct Puzzler {
     puzzles: Vec<PuzzleFn>
 }
 
+#[allow(dead_code)]
 impl Puzzler {
     pub fn new() -> Puzzler {
         Puzzler { puzzles: vec![] }
@@ -59,17 +59,15 @@ fn run_puzzle(puzzle: PuzzleFn, day: usize) {
     println!("==> Day {}", day);
     println!("--> With test input");
 
-    let file = path.to_owned() + "input_test";
-    _run_puzzle(puzzle, &path, &file);
+    _run_puzzle(puzzle, &path, "input_test");
 
     println!("--> With actual input");
 
-    let file = path.to_owned() + "input_full";
-    _run_puzzle(puzzle, &path, &file);
+    _run_puzzle(puzzle, &path, "input_full");
 }
 
 fn _run_puzzle(puzzle: PuzzleFn, input_path: &str, input_file: &str) {
-    puzzle(&mut read_lines(input_file).expect("Failed to read file"));
+    puzzle(&mut read_lines(input_path.to_owned() + input_file).expect("Failed to read file"));
 }
 
 // The output is wrapped in a Result to allow matching on errors
