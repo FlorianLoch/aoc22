@@ -2,7 +2,7 @@ use std::collections::{HashMap};
 use std::fs::File;
 use std::io::{BufReader, Lines};
 
-pub fn solve(lines: &mut Lines<BufReader<File>>) {
+pub fn solve(lines: &mut Lines<BufReader<File>>, _: bool) {
     let mut dir_map = HashMap::<String, u32>::new();
 
     // First line is always `$ cd /`, drop it.

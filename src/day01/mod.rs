@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufReader, Lines};
 
-pub fn solve(_: &mut Lines<BufReader<File>>) {
+pub fn solve(_: &mut Lines<BufReader<File>>, _: bool) {
     todo!()
 }
 

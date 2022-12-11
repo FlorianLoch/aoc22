@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufReader, Lines};
 
-pub fn solve(lines: &mut Lines<BufReader<File>>) {
+pub fn solve(lines: &mut Lines<BufReader<File>>, _: bool) {
     let mut signal_strengths = Vec::<i32>::new();
     let mut sum_signal_strengths = 0;
 

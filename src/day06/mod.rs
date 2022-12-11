@@ -2,7 +2,7 @@ use std::collections::HashSet;
 use std::fs::File;
 use std::io::{BufReader, Lines};
 
-pub fn solve(lines: &mut Lines<BufReader<File>>) {
+pub fn solve(lines: &mut Lines<BufReader<File>>, _: bool) {
     for line in lines {
         let idx = check_line(&line.expect("Could not read line"));
 

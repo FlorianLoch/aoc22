@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufReader, Lines};
 
-pub fn solve(lines: &mut Lines<BufReader<File>>) {
+pub fn solve(lines: &mut Lines<BufReader<File>>, _: bool) {
     let mut stacks = Vec::<Vec<char>>::new();
 
     // Test data

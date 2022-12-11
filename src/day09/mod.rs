@@ -70,7 +70,7 @@ fn parse_move(line: String) -> Vec<Move> {
     return moves;
 }
 
-pub fn solve(lines: &mut Lines<BufReader<File>>) {
+pub fn solve(lines: &mut Lines<BufReader<File>>, _: bool) {
     let mut moves = Vec::<Move>::new();
 
     for line in lines {

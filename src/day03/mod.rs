@@ -3,7 +3,7 @@ use std::fs::File;
 use std::io::{BufReader, Lines};
 use crate::puzzle;
 
-pub fn solve(lines: &mut Lines<BufReader<File>>) {
+pub fn solve(lines: &mut Lines<BufReader<File>>, _: bool) {
     let mut sum = 0;
 
     loop {

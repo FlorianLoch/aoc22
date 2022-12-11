@@ -3,7 +3,7 @@ use std::fs::File;
 use std::io::{self, BufRead, Lines};
 use std::path::Path;
 
-type PuzzleFn = fn (lines: &mut Lines<BufReader<File>>);
+type PuzzleFn = fn (lines: &mut Lines<BufReader<File>>, test_run: bool);
 
 pub struct Puzzler {
     puzzles: Vec<PuzzleFn>
@@ -59,15 +59,17 @@ fn run_puzzle(puzzle: PuzzleFn, day: usize) {
     println!("==> Day {}", day);
     println!("--> With test input");
 
-    _run_puzzle(puzzle, &path, "input_test");
+    _run_puzzle(puzzle, &path, true);
 
     println!("--> With actual input");
 
-    _run_puzzle(puzzle, &path, "input_full");
+    _run_puzzle(puzzle, &path, false);
 }
 
-fn _run_puzzle(puzzle: PuzzleFn, input_path: &str, input_file: &str) {
-    puzzle(&mut read_lines(input_path.to_owned() + input_file).expect("Failed to read file"));
+fn _run_puzzle(puzzle: PuzzleFn, input_path: &str, test_run: bool) {
+    let input_file = if test_run {"input_test"} else {"input_full"};
+
+    puzzle(&mut read_lines(input_path.to_owned() + input_file).expect("Failed to read file"), test_run);
 }
 
 // The output is wrapped in a Result to allow matching on errors
