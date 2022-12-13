@@ -14,6 +14,7 @@ mod day09;
 mod day10;
 mod day11;
 mod day12;
+mod day13;
 
 fn main() {
     let mut puzzler = puzzle::Puzzler::new();
@@ -30,6 +31,7 @@ fn main() {
     puzzler.add_puzzle(day10::solve);
     puzzler.add_puzzle(day11::solve);
     puzzler.add_puzzle(day12::solve);
+    puzzler.add_puzzle(day13::solve);
 
     puzzler.run_latest_puzzle()
 }

@@ -91,3 +91,13 @@ pub fn read_n_lines(lines: &mut Lines<BufReader<File>>, n: usize) -> Vec<String>
 
     return vec;
 }
+
+pub fn read_all_lines(lines: &mut Lines<BufReader<File>>) -> Vec<String> {
+    let mut all_lines = Vec::<String>::new();
+
+    for line in lines {
+        all_lines.push(line.expect("Failed to read line"));
+    }
+
+    return all_lines;
+}

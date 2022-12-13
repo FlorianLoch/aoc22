@@ -1,4 +1,4 @@
-use std::cmp::{min, Ordering};
+use std::cmp::{min};
 use std::fs::File;
 use std::io::{BufReader, Lines};
 
