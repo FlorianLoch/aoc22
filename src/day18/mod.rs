@@ -69,8 +69,6 @@ pub fn solve(lines: &mut Lines<BufReader<File>>, test: bool) {
     }
 
     println!("Part 2: Outer surface of droplet: {}", outsides);
-
-    return;
 }
 
 #[derive(Hash, Debug, Eq, PartialEq, Copy, Clone)]
