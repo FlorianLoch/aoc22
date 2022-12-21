@@ -1,5 +1,4 @@
 use std::cmp::{max, min};
-use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufReader, Lines};
 
@@ -15,7 +14,7 @@ pub fn solve(lines: &mut Lines<BufReader<File>>, test: bool) {
     let mut sum_quality_levels = 0;
 
     for (idx, blueprint) in blueprints.iter().enumerate() {
-        let geode_production = blueprint.simulate(24, Robots{
+        let geode_production = blueprint.simulate(24, Robots {
             ore_robots: 1,
             clay_robots: 0,
             obsidian_robots: 0,
@@ -93,7 +92,7 @@ impl Blueprint {
         };
     }
 
-    fn simulate(&self, mut minutes_remaining: i32, robots_available: Robots, ore_available: i32, clay_available: i32, obsidian_available: i32, geodes_collected: i32, mut max_geode_production_so_far: i32) -> i32 {
+    fn simulate(&self, mut minutes_remaining: i32, robots_available: Robots, ore_available: i32, clay_available: i32, obsidian_available: i32, geodes_collected: i32, max_geode_production_so_far: i32) -> i32 {
         if minutes_remaining <= 1 || (minutes_remaining <= 2 && robots_available.geode_robots == 0 && (ore_available < self.costs_geode_robot.ore || obsidian_available < self.costs_geode_robot.obsidian)) {
             return geodes_collected + minutes_remaining * robots_available.geode_robots;
         }
@@ -185,6 +184,3 @@ struct Costs {
     clay: i32,
     obsidian: i32,
 }
-
-
-
