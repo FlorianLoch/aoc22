@@ -1,4 +1,5 @@
 extern crate core;
+
 mod puzzle;
 
 mod day01;
@@ -22,6 +23,10 @@ mod day18;
 mod day19;
 mod day20;
 mod day21;
+mod day22;
+mod day23;
+mod day24;
+mod day25;
 
 fn main() {
     let mut puzzler = puzzle::Puzzler::new();
@@ -47,6 +52,11 @@ fn main() {
     puzzler.add_puzzle(day19::solve);
     puzzler.add_puzzle(day20::solve);
     puzzler.add_puzzle(day21::solve);
+    puzzler.add_puzzle(day22::solve);
+    puzzler.add_puzzle(day23::solve);
+    puzzler.add_puzzle(day24::solve);
+    puzzler.add_puzzle(day25::solve);
 
-    puzzler.run_latest_puzzle();
+    // puzzler.run_latest_puzzle();
+    puzzler.run_puzzle_for_day(24);
 }
